@@ -1,0 +1,230 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+	{% load static %}
+<title>Medical Emergency Form a Responsive Widget Template :: w3layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Medical Emergency Form template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs Sign up Web Templates,
+ Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- Custom Theme files -->
+<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+<link href="{% static 'css/stylee.css' %}" rel='stylesheet' type='text/css' />
+<!--fonts-->
+<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+<script type="text/javascript">
+
+
+
+     $(document).on('submit', '#createform', function(e){
+
+            var TestTypes = document.getElementByName("test");
+            var name = document.getElementsByName("name");
+            var gender = document.getElementsByName("gender");
+            var number = document.getElementsByName("number");
+            var age = document.getElementsByName("age");
+            var datepicker1 = document.getElementsByName("datepicker1");
+            var doctor_prefarance = document.getElementsByName("doctor_prefarance");
+            var details = document.getElementsByName("details");
+            var bp = document.getElementsByName("bp");
+            var pulse = document.getElementsByName("pulse");
+            var treatment = document.getElementsByName("treatment");
+            var guid = document.getElementsByName("guid");
+            var medicine = document.getElementsByName("medicine");
+			var selectedTest = [];
+			for (var i = 0; i < TestTypes.length; i++) {
+				if (TestTypes[i].checked) {
+					selectedTest.push(TestTypes[i].value);
+				}
+			}
+     	e.preventDefault();
+     	$.ajax({
+     		type:'POST',
+     		url:'/create/',
+     		data:{
+     			name:name,
+     			gender:gender,
+     			number:number,
+     			age:age,
+     			date:datepicker1,
+     			doctor_prefarance:doctor_prefarance,
+     			details:details,
+     			bp:bp,
+     			pulse:pulse,
+     			treatment:treatment,
+     			guid:guid,
+     			selected:selectedTest,
+     			medicine:medicine,
+     			csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+
+     		},
+     		success:function(){
+     			alert("create successfully");
+
+     		}
+     	})
+     })
+
+}
+
+
+</script>
+
+
+<!--//fonts-->
+</head>
+<body>
+<!--background-->
+<h1> Medical Emergency Form</h1>
+
+    <div class="bg-agile">
+	<div class="book-appointment">
+
+
+	<h2>Medical Information</h2>
+
+			<form action="/create" id="createform">
+				{% csrf_token %}
+				<div class="left-agileits-w3layouts same">
+					<div class="gaps">
+						<p> Name</p>
+						<input type="text" name="name" placeholder="Name" id="name" required=""/>
+					</div>
+
+					<div class="gaps" >
+						<p>Gender</p>
+							<select class="form-control" name="gender" id="gender">
+								<option></option>
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+							</select>
+					</div>
+					<div class="gaps">
+						<p>Age</p>
+						<input type="text" name="age" id="age" placeholder="Age" required=""/>
+					</div>
+					<div class="gaps">
+						<p>Phone Number</p>
+						<input type="text" name="number" id="number" placeholder="Mob.." required=""/>
+					</div>
+
+					<div class="gaps">
+						<p>Prescription Date</p>
+						<input  id="datepicker1" name="date" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
+					</div>
+					<div class="gaps">
+						<p>Doctor Preference</p>
+						<input type="text" name="doctor_prefarance" id="doctor_prefarance" placeholder="Doctor Preference" required=""/>
+					</div>
+					<div class="gaps">
+						<p>Description</p>
+						<textarea id="details" name="details" id="details" placeholder="" title="Please enter Your Comments"></textarea>
+						</div>
+
+					<li class="last-type" style='color:white'>
+							<label class="form-label1">
+								Suggest tests for Patient
+								<span class="form-required"> * </span>
+							</label>
+							<div id="test">
+								<input type="checkbox" name="test"  class="type-of-test" value="heart check">Heart Checkup
+								<input type="checkbox" name="test"  class="type-of-test" value="Eye Checkup">Eye Checkup
+								<input type="checkbox" name="test"  class="type-of-test" value="Hearing test">Hearing Test</br>
+								<input type="checkbox" name="test"  class="type-of-test" value="blood test">Blood Test
+								<input type="checkbox" name="test"  class="type-of-test" value="normal consulting">Normal Consulting
+								<input type="checkbox" name="test"  class="type-of-test" value="skin test">Skin Care
+							</div>
+						</li>
+				</div>
+				<div class="right-agileinfo same">
+
+					<div class="gaps">
+						<p>Blood Presure</p>
+							<input type="text" name="bp" id="bp" placeholder="BP" required=""/>
+					</div>
+					<div class="gaps">
+						<p>Pulse Rate</p>
+							<input type="text" name="pulse" id="pulse" placeholder="Pulse" required=""/>
+					</div>
+					<div class="gaps">
+						<li class="last-type" style='color:white'>
+							<label class="form-label1">
+								Treatment For
+								<span class="form-required"> * </span>
+							</label>
+							<div id="treatment">
+								<input type="radio" class="type-of-test" name="treatment" value="Illness" >Illness</input>
+								<input type="radio" class="type-of-test" name="treatment" value="Injured">Injured</input>
+								<input type="radio" class="type-of-test" name="treatment" value="others">Others</input>
+
+							</div>
+						</li>
+					</div>
+
+					<div class="gaps">
+						<p>Guideline</p>
+						<div >
+
+									<select name="guid" class="form-control" id="guid">
+										<option>&nbsp;</option>
+										<option value="1-1-1"> 1-1-1 </option>
+										<option value="0-1-1"> 0-1-1 </option>
+										<option value="0-0-1"> 0-0-1 </option>
+										<option value="0-1-0"> 0-1-0 </option>
+										<option value="1-0-0"> 1-0-0 </option>
+										<option value="1-0-1"> 1-0-1 </option>
+										<option value="1-1-0"> 1-1-0 </option>
+										<option value="1-1-1-1"> 1-1-1-1 </option>
+									</select>
+								</span>
+							</div>
+
+					</div>
+					<div class="gaps">
+						<p>Add Medecine</p>
+						<div >
+							<input type="text" id="medicine"> </input>
+                         <!--
+							<input type="button" id="button1" name="save" value="Add" onclick="add_element_to_array();"> </input>
+							<input type="button" id="button2" value="Display" onclick="display_array();"> </input>
+							<div style='color:white' id="Result"></div>
+							<div style='color:white' id="guideline"></div>
+							-->
+
+							</div>
+					</div>
+
+
+				</div>
+				<div class="clear"></div>
+				<input type="submit" value="Submit" id="submit">
+			</form>
+		</div>
+   </div>
+   <!--copyright-->
+			<div class="copy w3ls">
+		       <p>&copy; 2017. Medical Emergency Form . All Rights Reserved  | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+	        </div>
+		<!--//copyright-->
+		<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+		<!-- Calendar -->
+				<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" />
+				<script src="{% static 'js/jquery-ui.js' %}"></script>
+				  <script>
+						  $(function() {
+							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+						  });
+				  </script>
+			<!-- //Calendar -->
+
+</body>
+</html>
